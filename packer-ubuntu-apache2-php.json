@@ -27,6 +27,8 @@
                 "sudo a2enmod ssl",
                 "sudo systemctl start apache2",
                 "sudo systemctl enable apache2",
+                "sudo apt-get install -y unzip",
+                "sudo apt-get install -y zip",
                 "hostname | sudo tee /var/www/html/index.html",
                 "sudo touch /var/www/html/phpinfo.php",
                 "echo \"<?php phpinfo(); ?>\" | sudo tee /var/www/html/phpinfo.php"

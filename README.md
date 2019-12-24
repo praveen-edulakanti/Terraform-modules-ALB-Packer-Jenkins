@@ -9,11 +9,16 @@
     terraform init
     terraform workspace new QA
     terraform workspace select QA
-    terraform plan -var-file="QA.tfvars"
+    terraform plan -var-file="QA.tfvars" -input=true
+    terraform apply -var-file="QA.tfvars" -auto-approve
+    terraform destroy -var-file="QA.tfvars" -auto-approve
 
     terraform workspace new Staging
     terraform workspace select Staging
-    terraform plan -var-file="Staging.tfvars"
-8) Calling Terraform from Jenkins Application.    
+    terraform plan -var-file="Staging.tfvars" -input=true
+    terraform apply -var-file="Staging.tfvars" -auto-approve
+    terraform destroy -var-file="Staging.tfvars" -auto-approve
+8) Calling Terraform from Jenkins Application is the Main Goal.
+9) aws configure command used to setup aws_access_key_id, aws_secret_access_key in the Environment variables.
 
 
