@@ -1,0 +1,5 @@
+echo "*****************Build Terraform Plan Start Output*****************"
+sudo terraform init -var-file="$Environment.tfvars"
+sudo terraform workspace select $Environment
+sudo terraform plan -var-file="$Environment.tfvars" -out="$Environment"tfplanout -input=true
+echo "*****************Build Terraform Plan End Output*******************"

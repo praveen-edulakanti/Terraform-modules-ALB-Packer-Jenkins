@@ -1,0 +1,16 @@
+#!/bin/sh
+echo "*****************Build Application Job Start Output*****************"
+echo $WORKSPACE
+sudo mkdir "$WORKSPACE"/user
+sudo mkdir "$WORKSPACE"/dashboard
+
+sudo git clone https://github.com/praveen-edulakanti/user.git "$WORKSPACE"/user
+sudo git clone https://github.com/praveen-edulakanti/dashboard.git "$WORKSPACE"/dashboard
+
+sudo zip -r user.zip user/
+sudo zip -r dashboard.zip dashboard/
+
+aws s3 cp "$WORKSPACE"/user.zip s3://bucket_name/code_repo/
+aws s3 cp "$WORKSPACE"/dashboard.zip s3://bucket_name/code_repo/
+
+echo "*****************Build Application Job End Output*****************"
