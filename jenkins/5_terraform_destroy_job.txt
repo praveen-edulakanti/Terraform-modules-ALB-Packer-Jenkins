@@ -1,0 +1,5 @@
+echo "****************Build Terraform Destroy Start Output****************"
+cd /var/lib/jenkins/jobs/'Terraform Plan'/workspace/
+sudo terraform workspace select $Environment
+sudo terraform destroy -var-file="$Environment.tfvars" -auto-approve
+echo "****************Build Terraform Destroy End Output****************"
