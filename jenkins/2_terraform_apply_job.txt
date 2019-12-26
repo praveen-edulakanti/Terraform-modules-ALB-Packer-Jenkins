@@ -1,7 +1,9 @@
 echo "*****************Build Terraform Apply Start Output*****************"
-sudo terraform init -var-file="$Environment.tfvars"
+#sudo terraform init -var-file="$Environment.tfvars"
+#sudo terraform workspace select $Environment
+#sudo terraform apply -var-file="$Environment.tfvars" -auto-approve
+
+cd /var/lib/jenkins/jobs/'Terraform Plan'/workspace/
 sudo terraform workspace select $Environment
-sudo terraform apply -var-file="$Environment.tfvars" -auto-approve
-#cd /var/lib/jenkins/jobs/'Terraform Plan'/workspace/
-#sudo terraform apply "$Environment"tfplanout -auto-approve
+sudo terraform apply -auto-approve "$Environment"tfplanout
 echo "*****************Build Terraform Apply End Output******************"
