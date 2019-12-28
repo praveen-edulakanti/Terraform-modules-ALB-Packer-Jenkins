@@ -17,3 +17,11 @@ output "public_subnet_ids" {
 output "private_subnet_ids" {
 	value = module.subnets.private_subnet_ids
 }
+
+output "publicsubnetroutetable_ids" {
+	value = module.subnets.publicsubnetroutetable_ids
+}
+
+output "privatesubnetroutetable_ids" {
+	value = module.subnets.privatesubnetroutetable_ids
+}

@@ -1,6 +1,7 @@
 region      = "ap-south-1"
 environment = "QA"
 project     = "DemoProject"
+
 vpc = {
   name       = "QA_VPC"
   cidr_block = "10.100.0.0/16"
@@ -72,6 +73,8 @@ public_subnet_route_tables = [
     name = "QA-PublicRT"
   }
 ]
+
+peerconnection_name = "QA_PeerConnection"
 
 PublicSecurityGrp_egress = [
   {

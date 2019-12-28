@@ -30,13 +30,13 @@ NATGateways = [
 
 public_subnets = [
   {
-    name              = "PublicSubnet1a"
+    name              = "Staging-PublicSubnet1a"
     cidr_block        = "10.101.1.0/24"
     availability_zone = "ap-south-1a"
     #map_public_ip_on_launch = true
   },
   {
-    name              = "PublicSubnet1b"
+    name              = "Staging-PublicSubnet1b"
     cidr_block        = "10.101.2.0/24"
     availability_zone = "ap-south-1b"
     #map_public_ip_on_launch = true
@@ -45,13 +45,13 @@ public_subnets = [
 
 private_subnets = [
   {
-    name                    = "PrivateSubnet1a"
+    name                    = "Staging-PrivateSubnet1a"
     cidr_block              = "10.101.3.0/24"
     availability_zone       = "ap-south-1a"
     map_public_ip_on_launch = false
   },
   {
-    name                    = "PrivateSubnet1b"
+    name                    = "Staging-PrivateSubnet1b"
     cidr_block              = "10.101.4.0/24"
     availability_zone       = "ap-south-1b"
     map_public_ip_on_launch = false
@@ -60,18 +60,20 @@ private_subnets = [
 
 private_subnet_route_tables = [
   {
-    name = "PrivateSubnetRT1"
+    name = "Staging-PrivateSubnetRT1"
   },
   {
-    name = "PrivateSubnetRT2"
+    name = "Staging-PrivateSubnetRT2"
   }
 ]
 
 public_subnet_route_tables = [
   {
-    name = "PublicRT"
+    name = "Staging-PublicRT"
   }
 ]
+
+peerconnection_name = "Staging_PeerConnection"
 
 PublicSecurityGrp_egress = [
   {
@@ -94,7 +96,7 @@ PrivateSecurityGrp_egress = [
 
 PublicInstances = [
   {
-    name                        = "JumpServer"
+    name                        = "Staging-JumpServer"
     ami                         = "ami-0123b531fc646552f" #Ubuntu Server 18.04 LTS (HVM)
     availability_zone           = "ap-south-1a"
     instance_type               = "t2.micro"
@@ -103,7 +105,7 @@ PublicInstances = [
     user_data                   = "./user-data/user-data-pub1.sh"
   },
   {
-    name                        = "DBServer"
+    name                        = "Staging-DBServer"
     ami                         = "ami-0123b531fc646552f" #Ubuntu Server 18.04 LTS (HVM)
     availability_zone           = "ap-south-1b"
     instance_type               = "t2.micro"
@@ -115,7 +117,7 @@ PublicInstances = [
 
 PrivateInstances = [
   {
-    name                        = "PrivLoadBal1a"
+    name                        = "Staging-PrivLoadBal1a"
     ami_name                    = "Packer_UbuntuApachePhp"
     availability_zone           = "ap-south-1a"
     instance_type               = "t2.micro"
@@ -123,7 +125,7 @@ PrivateInstances = [
     associate_public_ip_address = false
   },
   {
-    name                        = "PrivLoadBal1b"
+    name                        = "Staging-PrivLoadBal1b"
     ami_name                    = "Packer_UbuntuApachePhp"
     availability_zone           = "ap-south-1b"
     instance_type               = "t2.micro"
@@ -132,7 +134,7 @@ PrivateInstances = [
   }
 ]
 
-LoadBalancerName = "QA-LoadBalancer"
+LoadBalancerName = "Staging-LoadBalancer"
 
 TargetGroupNames = [
   {

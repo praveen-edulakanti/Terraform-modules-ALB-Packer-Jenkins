@@ -42,6 +42,10 @@ variable "public_subnet_route_tables" {
   type = list
 }
 
+variable "peerconnection_name" {
+  type = string
+}
+
 variable "PublicSecurityGrp_egress" {
   type = list
 }

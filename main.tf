@@ -53,3 +53,15 @@ module "route53" {
   alias            = module.apploadbalancer.route53_alias
   DomainAliases    = var.DomainAliases
 }
+
+module "peerconnection" {
+  source           = "./modules/peerconnection"
+  #owner_vpc_id     = ""
+  acceptervpc_cidr  = var.vpc.cidr_block
+  accepter_vpc_id = module.networking.vpc_id
+  publicsubnetroutetable  = module.networking.publicsubnetroutetable_ids
+  privatesubnetroutetable = module.networking.privatesubnetroutetable_ids
+  environment          = var.environment
+  project              = var.project
+  peerconnection_name  = var.peerconnection_name
+}

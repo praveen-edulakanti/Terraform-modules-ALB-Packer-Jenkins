@@ -1,6 +1,6 @@
 #Creating a peer connection QAVPC as accepter
 resource "aws_vpc_peering_connection" "peerconnection" {
-  peer_owner_id =  "863896359115"
+  peer_owner_id =  ""
   peer_vpc_id   =  aws_default_vpc.default.id
   vpc_id        =  var.accepter_vpc_id
 

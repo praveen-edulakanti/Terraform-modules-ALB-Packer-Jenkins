@@ -38,6 +38,14 @@ output "private_subnet_ids" {
   value = module.networking.private_subnet_ids
 }
 
+output "publicsubnetroutetable_ids" {
+	value = module.networking.publicsubnetroutetable_ids
+}
+
+output "privatesubnetroutetable_ids" {
+	value = module.networking.privatesubnetroutetable_ids
+}
+
 output "PublicSecurityGrpID" {
   value = module.security.public_securityGrp
 }
