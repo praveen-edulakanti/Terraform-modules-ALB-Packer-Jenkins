@@ -1,0 +1,40 @@
+pipeline {
+    agent any 
+    stages {
+        stage('Terraform Code Pull'){
+           steps {
+               git url: 'https://github.com/praveen-edulakanti/Terraform-modules-ALB-Packer-Jenkins.git'
+           }
+        }
+        stage('Terraform Plan') { 
+            steps {
+                sh 'pwd'
+                sh 'ls -l'
+				sh 'sudo terraform init -var-file="${Environment}.tfvars"'
+				sh 'sudo terraform workspace select ${Environment}'
+				sh 'sudo terraform plan -var-file="${Environment}.tfvars" -out=${Environment}tfplanout -input=true'
+            }
+        }
+        stage('Terraform Apply') { 
+            steps {
+             sh 'sudo terraform workspace select ${Environment}'
+             sh 'sudo terraform apply -auto-approve "${Environment}"tfplanout'
+            }
+        }
+        stage('Application Job') { 
+            steps {
+               sh 'echo ${WORKSPACE}'
+               sh 'pwd'
+               sh 'sudo mkdir "${WORKSPACE}"/user'
+               sh 'sudo mkdir "${WORKSPACE}"/dashboard'
+               sh 'sudo git clone https://github.com/praveen-edulakanti/user.git "${WORKSPACE}"/user'
+               sh 'sudo git clone https://github.com/praveen-edulakanti/dashboard.git "${WORKSPACE}"/dashboard'
+               sh 'sudo zip -r user.zip user/'
+               sh 'sudo zip -r dashboard.zip dashboard/'
+               sh 'ls -l'
+               sh 'aws s3 cp "${WORKSPACE}"/user.zip s3://Bucket_Name/code_repo/'
+               sh 'aws s3 cp "${WORKSPACE}"/dashboard.zip s3://Bucket_Name/code_repo/'
+            }
+        }
+    }
+}
