@@ -1,11 +1,11 @@
 #!/bin/sh
 echo "*****************Build Application Deployment Start Output*****************"
 pwd
-echo "$WORKSPACE"
+echo $4
 sudo wget https://$3.s3.ap-south-1.amazonaws.com/code_repo/user.zip
 sudo wget https://$3.s3.ap-south-1.amazonaws.com/code_repo/dashboard.zip
-sudo cp /var/lib/jenkins/private.pem "$WORKSPACE"
-sudo cp /var/lib/jenkins/config.php "$WORKSPACE"
+sudo cp /var/lib/jenkins/private.pem $4
+sudo cp /var/lib/jenkins/config.php $4
 
 
 moving_code_remote()
@@ -16,15 +16,15 @@ moving_code_remote()
   echo "Private IP Address: $PrivareIP"
   echo "Code Folder: $CodeZip"
   
-  sudo scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i "$WORKSPACE"/private.pem "$WORKSPACE"/$CodeZip ubuntu@$PrivareIP:~
+  sudo scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i $4/private.pem $4/$CodeZip ubuntu@$PrivareIP:~
   
-  sudo ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i "$WORKSPACE"/private.pem ubuntu@$PrivareIP "sudo cp /home/ubuntu/$CodeZip /var/www/html/"
+  sudo ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i $4/private.pem ubuntu@$PrivareIP "sudo cp /home/ubuntu/$CodeZip /var/www/html/"
   
-  sudo ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i "$WORKSPACE"/private.pem ubuntu@$PrivareIP "cd /var/www/html/; sudo unzip -o $CodeZip"
+  sudo ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i $4/private.pem ubuntu@$PrivareIP "cd /var/www/html/; sudo unzip -o $CodeZip"
   
-  sudo scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i "$WORKSPACE"/private.pem "$WORKSPACE"/config.php ubuntu@$PrivareIP:~
+  sudo scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i $4/private.pem $4/config.php ubuntu@$PrivareIP:~
   
-  sudo ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i "$WORKSPACE"/private.pem ubuntu@$PrivareIP "sudo cp /home/ubuntu/config.php /var/www/html/user/"
+  sudo ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i $4/private.pem ubuntu@$PrivareIP "sudo cp /home/ubuntu/config.php /var/www/html/user/"
 
 }
 
