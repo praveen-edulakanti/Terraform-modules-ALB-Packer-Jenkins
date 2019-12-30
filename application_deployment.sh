@@ -12,25 +12,25 @@ moving_code_remote()
 {
   PrivareIP=$1
   CodeZip=$2
-  
+  WORKSPACE=$4
   echo "Private IP Address: $PrivareIP"
   echo "Code Folder: $CodeZip"
   
-  sudo scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i $4/private.pem $4/$CodeZip ubuntu@$PrivareIP:~
+  sudo scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i $WORKSPACE/private.pem $WORKSPACE/$CodeZip ubuntu@$PrivareIP:~
   
-  sudo ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i $4/private.pem ubuntu@$PrivareIP "sudo cp /home/ubuntu/$CodeZip /var/www/html/"
+  sudo ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i $WORKSPACE/private.pem ubuntu@$PrivareIP "sudo cp /home/ubuntu/$CodeZip /var/www/html/"
   
-  sudo ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i $4/private.pem ubuntu@$PrivareIP "cd /var/www/html/; sudo unzip -o $CodeZip"
+  sudo ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i $WORKSPACE/private.pem ubuntu@$PrivareIP "cd /var/www/html/; sudo unzip -o $CodeZip"
   
-  sudo scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i $4/private.pem $4/config.php ubuntu@$PrivareIP:~
+  sudo scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i $WORKSPACE/private.pem $WORKSPACE/config.php ubuntu@$PrivareIP:~
   
-  sudo ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i $4/private.pem ubuntu@$PrivareIP "sudo cp /home/ubuntu/config.php /var/www/html/user/"
+  sudo ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i $WORKSPACE/private.pem ubuntu@$PrivareIP "sudo cp /home/ubuntu/config.php /var/www/html/user/"
 
 }
 
-moving_code_remote $1 user.zip
-moving_code_remote $1 dashboard.zip
-moving_code_remote $2 user.zip
-moving_code_remote $2 dashboard.zip
+moving_code_remote $1 user.zip '' $4
+moving_code_remote $1 dashboard.zip '' $4
+moving_code_remote $2 user.zip '' $4
+moving_code_remote $2 dashboard.zip '' $4
 
 echo "*****************Build Application Deployment End Output*****************"
