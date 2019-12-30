@@ -69,3 +69,28 @@ output "AppLoadBalancerURL" {
 output "Targetgroup_ids" {
     value = module.apploadbalancer.Targetgroup_ids
 }
+
+output "PrivateInstance_ip_addr" {
+  value = module.instance.PrivateInstance_ip_addr
+}
+
+output "PublicInstance_ip_addr" {
+  value = module.instance.PublicInstance_ip_addr
+}
+
+output "PublicInstIPAddr1" {
+  value = "${element(module.instance.PublicInstance_ip_addr, 0)}"
+}
+
+output "PublicInstIPAddr2" {
+  value = "${element(module.instance.PublicInstance_ip_addr, 1)}"
+}
+
+output "PrivateInstIPAddr1" {
+  value = "${element(module.instance.PrivateInstance_ip_addr, 0)}"
+}
+
+output "PrivateInstIPAddr2" {
+  value = "${element(module.instance.PrivateInstance_ip_addr, 1)}"
+}
+

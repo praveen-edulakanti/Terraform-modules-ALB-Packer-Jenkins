@@ -97,7 +97,7 @@ PrivateSecurityGrp_egress = [
 
 PublicInstances = [
   {
-    name                        = "QA-PublicInstance1a"
+    name                        = "QA-JumpServer1a"
     ami                         = "ami-0123b531fc646552f" #Ubuntu Server 18.04 LTS (HVM)
     availability_zone           = "ap-south-1a"
     instance_type               = "t2.micro"
