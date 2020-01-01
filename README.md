@@ -20,5 +20,8 @@
     terraform destroy -var-file="Staging.tfvars" -auto-approve
 8) Calling Terraform from Jenkins Application is the Main Goal.
 9) aws configure command used to setup aws_access_key_id, aws_secret_access_key in the Environment variables.
+10) In Jenkins: This project is parameterized with option, Choice Parameter used to show list of QA, Staging
+11)Build after other projects are built used to call other jobs sequence order i.e Terraform Plan, Terraform Apply, Application Job(Store Code in S3), Application Deployment(deploy code in ec2 instance)
+12) Jenkins Jobs shell script is able in jenkins folder in the repository.
 
 
